@@ -128,3 +128,18 @@ deck@steamdeck ~/.vim_runtime (master)> grep -rni '<leader>[m,n,r]' .
 ./vimrcs/extended.vim:135:"   <leader>n
 ./vimrcs/extended.vim:142:map <leader>n :cn<cr>
 ```
+
+### vim-yankstack
+
+When a new file is opened in Vim, a strange string like `stack_after_paste\P +n`
+is automatically inserted. Deleting vim-yankstack resolved the issue.
+
+```sh
+ renjianing@renjianingdeMBP  ~/.vim_runtime   master ±  grep -rn 'stack_after_paste' .
+./sources_non_forked/vim-yankstack/autoload/yankstack.vim:29:  call feedkeys("\<Plug>yankstack_after_paste", "m")
+./sources_non_forked/vim-yankstack/autoload/yankstack.vim:185:nnoremap <silent> <Plug>yankstack_after_paste :call <SID>after_paste()<CR>
+./sources_non_forked/vim-yankstack/autoload/yankstack.vim:186:xnoremap <silent> <Plug>yankstack_after_paste :<C-u>call <SID>after_paste()<CR>
+./sources_non_forked/vim-yankstack/autoload/yankstack.vim:187:inoremap <silent> <Plug>yankstack_after_paste <C-o>:call <SID>after_paste()<CR>
+./tags:233:<Plug>yankstack_after_paste	sources_non_forked/vim-yankstack/autoload/yankstack.vim	/^inoremap <silent> <Plug>yankstack_after_paste <C-o>:call <SID>after_paste()<CR>$/;"	m
+./tags:234:<Plug>yankstack_after_paste	sources_non_forked/vim-yankstack/autoload/yankstack.vim	/^nnoremap <silent> <Plug>yankstack_after_paste :call <SID>after_paste()<CR>$/;"	m
+```
