@@ -100,46 +100,8 @@ index 59901f6..dd8e72c 100644
          return
 ```
 
-### vim-mark
-
-```sh
-Error detected while processing /Users/renjianing/.vim/plugged/vim-mark/plugin/mark.vim:
-line  264:
-E227: Mapping already exists for ,m
-line  267:
-E227: Mapping already exists for ,m
-line  274:
-E227: Mapping already exists for ,r
-line  277:
-E227: Mapping already exists for ,n
-Press ENTER or type command to continue
-```
-
-Find the conflicting configurations and delete it!
-
-```sh
-deck@steamdeck ~/.vim_runtime (master)> grep -rni '<leader>[m,n,r]' .
-./vimrcs/basic.vim:323:noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-./vimrcs/plugins_config.vim:95:map <leader>nn :NERDTreeToggle<cr>
-./vimrcs/plugins_config.vim:96:map <leader>nb :NERDTreeFromBookmark<Space>
-./vimrcs/plugins_config.vim:97:map <leader>nf :NERDTreeFind<cr>
-./vimrcs/extended.vim:126:" When you press <leader>r you can search and replace the selected text
-./vimrcs/extended.vim:127:vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
-./vimrcs/extended.vim:135:"   <leader>n
-./vimrcs/extended.vim:142:map <leader>n :cn<cr>
-```
-
-### vim-yankstack
+### randomly input `p` when opening
 
 When a new file is opened in Vim, a strange string like `stack_after_paste\P +n`
-is automatically inserted. Deleting vim-yankstack resolved the issue.
-
-```sh
- renjianing@renjianingdeMBP  ~/.vim_runtime   master ±  grep -rn 'stack_after_paste' .
-./sources_non_forked/vim-yankstack/autoload/yankstack.vim:29:  call feedkeys("\<Plug>yankstack_after_paste", "m")
-./sources_non_forked/vim-yankstack/autoload/yankstack.vim:185:nnoremap <silent> <Plug>yankstack_after_paste :call <SID>after_paste()<CR>
-./sources_non_forked/vim-yankstack/autoload/yankstack.vim:186:xnoremap <silent> <Plug>yankstack_after_paste :<C-u>call <SID>after_paste()<CR>
-./sources_non_forked/vim-yankstack/autoload/yankstack.vim:187:inoremap <silent> <Plug>yankstack_after_paste <C-o>:call <SID>after_paste()<CR>
-./tags:233:<Plug>yankstack_after_paste	sources_non_forked/vim-yankstack/autoload/yankstack.vim	/^inoremap <silent> <Plug>yankstack_after_paste <C-o>:call <SID>after_paste()<CR>$/;"	m
-./tags:234:<Plug>yankstack_after_paste	sources_non_forked/vim-yankstack/autoload/yankstack.vim	/^nnoremap <silent> <Plug>yankstack_after_paste :call <SID>after_paste()<CR>$/;"	m
-```
+or last yanked string is automatically inserted. Set TagList:Tlist_Auto_Open = 0
+will solve the problem!

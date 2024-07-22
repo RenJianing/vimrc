@@ -10,17 +10,18 @@ set tabstop=8
 set shiftwidth=8
 set noexpandtab
 
-" Switch user<F6> and kernel<F7> coding style "
-nnoremap <F6> :set tabstop=4<CR>:set shiftwidth=4<CR>:set expandtab<CR>
-nnoremap <F7> :set tabstop=8<CR>:set shiftwidth=8<CR>:set noexpandtab<CR>
+" unmap key for vim-mark
+unmap <Leader>m
+unmap <Leader>n
+unmap <Leader>r
 
 " vim-plug "
 call plug#begin('~/.vim/plugged')
 Plug 'vim-scripts/taglist.vim'
-let g:Tlist_Show_One_File = 1
+let g:Tlist_Show_One_File = 0
 let g:Tlist_Auto_Update = 1
 let g:Tlist_Exit_OnlyWindow = 1
-let g:Tlist_Auto_Open = 1
+let g:Tlist_Auto_Open = 0
 let g:Tlist_Use_Right_Window = 0
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'inkarkat/vim-mark'
@@ -29,6 +30,7 @@ Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'godlygeek/tabular'
+Plug 'zivyangll/git-blame.vim'
 call plug#end()
 
 " Show lines, toggled with <F2> "
@@ -45,6 +47,10 @@ map <F4> <Esc>:TlistToggle<Cr>
 " Enable mouse by default, toggle with <F5> "
 set mouse=a
 nnoremap <F5> :exec &mouse=='a' ? ':set mouse-=a' : ':set mouse=a'<CR>
+
+" Switch user<F6> and kernel<F7> coding style "
+nnoremap <F6> :set tabstop=4<CR>:set shiftwidth=4<CR>:set expandtab<CR>
+nnoremap <F7> :set tabstop=8<CR>:set shiftwidth=8<CR>:set noexpandtab<CR>
 
 " resize horzontal split window "
 nmap <C-Up> <C-W>-<C-W>-
@@ -79,6 +85,9 @@ nnoremap <leader>fg :GFiles<CR>
 nnoremap <leader>f? :GFiles?<CR>
 nnoremap <leader>ft :Tags<CR>
 nnoremap <leader>fc :Commits<CR>
+
+" vim-blame "
+nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
 
 set path+=/usr/local/opt/ffmpeg/include
 set path+=/Volumes/Code/kernel/include
